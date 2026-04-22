@@ -28,7 +28,7 @@ Przykład:
 sudo mkdir -p /opt/elvis
 sudo chown $USER:$USER /opt/elvis
 cd /opt/elvis
-git clone https://github.com/sensorwifi1/elvis.zjedz.it.git .
+git clone https://github.com/zjedzit/truck-menu.git .
 ```
 
 Jeżeli repozytorium już jest na serwerze, po prostu przejdź do katalogu:

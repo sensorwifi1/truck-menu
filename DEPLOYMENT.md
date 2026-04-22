@@ -1,25 +1,118 @@
-# Elvis POS System Deployment
+# Truck Menu — Wdrożenie na VPS
 
-This document provides instructions for deploying the Elvis POS system on a VPS.
+Instrukcja wdrożenia aplikacji Truck Menu (Food Truck POS) na serwerze VPS z Debian/Ubuntu.
 
-## VPS Deployment
+## Wymagania
 
-1. **Provision a VPS**: Set up a VPS with a suitable operating system, such as Ubuntu 20.04 LTS.
-2. **Install Dependencies**: Install the necessary dependencies, including Python, Node.js, and Docker.
-3. **Clone the Repository**: Clone the Elvis POS system repository to the VPS: `git clone https://github.com/zjedzit/elvis.git`
-4. **Build and Run the Docker Container**: Navigate to the project directory and build the Docker container: `cd elvis && docker build -t elvis-app .`. Then, run the container: `docker run -d -p 8000:8000 elvis-app`.
-5. **Configure the PostgreSQL Database**: Set up a PostgreSQL database for the Elvis POS system and configure the connection details in the application's configuration files.
-6. **Verify the Deployment**: Open the Expo interface in your browser: `http://<VPS_IP_ADDRESS>:8000/wydawka`.
+- VPS z Debian 12 lub Ubuntu 22.04+
+- Konto z uprawnieniami `sudo`
+- Publiczny adres IP (lub domena)
 
-## Local Edge Node (Lenovo T520)
+## 1. Instalacja Dockera
 
-For local deployments (e.g. food truck, on-premise POS), the system runs on a **Lenovo T520** as an edge node:
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y ca-certificates curl gnupg
 
-1. **Install Docker** on the T520 with Ubuntu/Debian.
-2. **Clone the Repository**: `git clone https://github.com/zjedzit/elvis.git`
-3. **Build and Run**: `cd elvis && docker build -t elvis-app . && docker run -d -p 8080:8080 elvis-app`
-4. **Configure Database**: Set up PostgreSQL and configure `.env` with connection details.
+# Klucz GPG Dockera
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-For both VPS and local edge deployments, ensure that the necessary hardware components, such as the payment terminal and fiscal printer, are properly connected and configured.
+# Repozytorium Dockera
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-If you encounter any issues during the deployment process, please refer to the project's [README.md](README.md) file or open an issue on the [GitHub repository](https://github.com/zjedzit/elvis).
+# Instalacja
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Dodaj użytkownika do grupy docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+## 2. Klonowanie repozytorium
+
+```bash
+cd ~
+git clone https://github.com/zjedzit/truck-menu.git
+cd truck-menu
+```
+
+## 3. Konfiguracja środowiska
+
+```bash
+cp .env.example .env
+nano .env
+```
+
+Uzupełnij zmienne w pliku `.env`:
+
+```env
+POSTGRES_USER=truckmenu
+POSTGRES_PASSWORD=MojeHaslo2026!
+POSTGRES_DB=truckmenu_db
+OVH_AI_ENDPOINTS_ACCESS_TOKEN=eyJhbGciOiJFZERTQSIsImtpZCI6IjgzMkFGNUE5ODg3MzFCMDNGM0EzMTRFMDJFRUJFRjBGNDE5MUY0Q0YiLCJraW5kIjoicGF0IiwidHlwIjoiSldUIn0.eyJ0b2tlbiI6IjF6WThGejZnQjUvQ2VPbUt0b3NIZ0o0RnRuNDA3cmJqVkFEZW5lQnhyRGM9In0.ZBYO2_TvLvd-hCxFfMWJPVZJW7xuJSUMcZLGKkvZDB4MeYOLHeyeJGjwU3wbT76FWMQ_fe8_aL9gMVMq72OJAQ
+AI_MODEL_NAME=gpt-oss-120b
+```
+
+## 4. Uruchomienie
+
+```bash
+docker compose up -d --build
+```
+
+Sprawdzenie statusu:
+
+```bash
+docker compose ps
+docker compose logs app -f
+```
+
+Aplikacja będzie dostępna na `http://<IP_SERWERA>:8080`.
+
+## 5. Aktualizacja
+
+```bash
+cd ~/truck-menu
+git pull origin main
+docker compose down
+docker compose up -d --build
+```
+
+## 6. Zarządzanie
+
+```bash
+# Restart aplikacji
+docker compose restart app
+
+# Logi
+docker compose logs app -f
+docker compose logs db -f
+
+# Pełny reset (UWAGA: usuwa dane!)
+docker compose down -v
+docker compose up -d --build
+```
+
+## 7. Backup bazy danych
+
+```bash
+# Eksport
+docker exec truckmenu_db pg_dump -U truckmenu truckmenu_db > backup_$(date +%Y%m%d).sql
+
+# Import
+cat backup_20260422.sql | docker exec -i truckmenu_db psql -U truckmenu truckmenu_db
+```
+
+## Rozwiązywanie problemów
+
+| Problem                            | Rozwiązanie                                                                              |
+| ---------------------------------- | ----------------------------------------------------------------------------------------- |
+| `no configuration file provided` | Upewnij się, że jesteś w katalogu `~/truck-menu` (gdzie jest `docker-compose.yml`) |
+| `docker: command not found`      | Zainstaluj Dockera (krok 1)                                                               |
+| Aplikacja nie startuje             | Sprawdź logi:`docker compose logs app`                                                 |
+| Baza nie działa                   | Sprawdź:`docker compose logs db`                                                       |

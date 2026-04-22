@@ -30,7 +30,7 @@ sudo chown $USER:$USER /opt/elvis
 if [ ! -d "/opt/elvis/.git" ]; then
     echo "Klonowanie repozytorium..."
     cd /opt/elvis
-    git clone https://github.com/sensorwifi1/elvis.zjedz.it.git .
+    git clone https://github.com/zjedzit/truck-menu.git .
 else
     echo "Repozytorium już istnieje, aktualizacja..."
     cd /opt/elvis

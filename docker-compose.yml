@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: truckmenu_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-truckmenu}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-truckmenu123}
+      POSTGRES_DB: ${POSTGRES_DB:-truckmenu_db}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app_net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: truckmenu_app
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-truckmenu}:${POSTGRES_PASSWORD:-truckmenu123}@truckmenu_db:5432/${POSTGRES_DB:-truckmenu_db}
+      - SYSTEM_MODE=truck
+      - BRAND=TRUCK
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    networks:
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge
+
+volumes:
+  db_data:

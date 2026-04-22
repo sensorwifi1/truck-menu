@@ -15,8 +15,8 @@ The Elvis POS system is a cloud-based, AI-powered Point-of-Sale solution designe
 ### Local Development
 To set up the development environment, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/zjedzit/elvis.git`
-2. Install the required dependencies: `cd elvis && pip install -r requirements.txt`
+1. Clone the repository: `git clone https://github.com/zjedzit/truck-menu.git`
+2. Install the required dependencies: `cd truck-menu && pip install -r requirements.txt`
 3. Start the development server: `python main.py`
 4. Open the application in your browser: `http://localhost:8000`
 
@@ -24,7 +24,7 @@ To set up the development environment, follow these steps:
 For deployment on a VPS or local edge node (Lenovo T520), please refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file for detailed instructions.
 
 ## Contributing
-We welcome contributions to the Elvis POS system. If you find any issues or have ideas for improvements, please feel free to submit a pull request or open an issue on the [GitHub repository](https://github.com/zjedzit/elvis).
+We welcome contributions to the Elvis POS system. If you find any issues or have ideas for improvements, please feel free to submit a pull request or open an issue on the [GitHub repository](https://github.com/zjedzit/truck-menu).
 
 ## License
 The Elvis POS system is licensed under the [MIT License](LICENSE).
