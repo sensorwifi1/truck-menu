@@ -3054,7 +3054,8 @@ async def get_dash_status():
                 "latency_ms": latency,
                 "db_size": db_size,
                 "app_status": app_c.status if app_c else "missing",
-                "custom_template": has_custom_template
+                "custom_template": has_custom_template,
+                "template_path": f"/opt/elvis/ovh/templates_{prefix}" if has_custom_template else "Domyślny"
             })
     except Exception as e:
         status["error"] = f"Docker problem: {str(e)}"
@@ -3219,16 +3220,19 @@ async def delete_tenant(payload: TenantRequest):
         import yaml
         import subprocess
         
-        # 1. Stop and remove containers and volumes
+        # 1. Stop and remove containers and volumes via Docker API
         client = docker.from_env()
         for suffix in ["_app", "_db"]:
+            c_name = f"{tenant}{suffix}"
             try:
-                c = client.containers.get(f"{tenant}{suffix}")
-                c.stop()
-                c.remove(v=True) # Remove volumes associated with the container
-            except: pass
+                c = client.containers.get(c_name)
+                print(f"Stopping and removing container: {c_name}")
+                c.stop(timeout=5)
+                c.remove(v=True, force=True) 
+            except Exception as e:
+                print(f"Container {c_name} not found or already removed: {e}")
 
-        # 2. Edycja pliku Caddyfile
+        # 2. Edycja pliku Caddyfile (bardziej elastyczny regex)
         caddyfile_path = "ovh/Caddyfile"
         if not os.path.exists(caddyfile_path):
             caddyfile_path = "/app/ovh/Caddyfile"
@@ -3237,14 +3241,17 @@ async def delete_tenant(payload: TenantRequest):
             with open(caddyfile_path, "r", encoding="utf-8") as f:
                 content = f.read()
             
-            # Simple block removal logic
+            # Pattern matches: optional newlines + domain { ... } + optional newlines
+            # Handles different spacing and variations in block content
             import re
-            pattern = re.compile(rf"\n\n{tenant}\.zjedz\.it\s*\{{[^}}]*\s*\}}", re.DOTALL)
-            new_content = pattern.sub("", content)
+            pattern = re.compile(rf"\s*{tenant}\.zjedz\.it\s*\{{[^}}]*\s*\}}", re.DOTALL)
+            new_content = pattern.sub("", content).strip()
             
+            # Ensure Caddyfile stays clean
             if new_content != content:
                 with open(caddyfile_path, "w", encoding="utf-8") as f:
-                    f.write(new_content)
+                    f.write(new_content + "\n")
+                print(f"Removed {tenant} from Caddyfile")
 
         # 3. Edycja pliku docker-compose.yml
         compose_path = "ovh/docker-compose.yml"
@@ -3255,34 +3262,42 @@ async def delete_tenant(payload: TenantRequest):
             with open(compose_path, "r", encoding="utf-8") as f:
                 compose_data = yaml.safe_load(f)
             
+            modified = False
             if "services" in compose_data:
-                if f"{tenant}_app" in compose_data["services"]:
-                    del compose_data["services"][f"{tenant}_app"]
-                if f"{tenant}_db" in compose_data["services"]:
-                    del compose_data["services"][f"{tenant}_db"]
+                for suffix in ["_app", "_db"]:
+                    svc_name = f"{tenant}{suffix}"
+                    if svc_name in compose_data["services"]:
+                        del compose_data["services"][svc_name]
+                        modified = True
             
             if "volumes" in compose_data and compose_data["volumes"]:
                 vol_name = f"{tenant}_db_data"
                 if vol_name in compose_data["volumes"]:
                     del compose_data["volumes"][vol_name]
+                    modified = True
             
-            with open(compose_path, "w", encoding="utf-8") as f:
-                yaml.dump(compose_data, f, default_flow_style=False, sort_keys=False)
+            if modified:
+                with open(compose_path, "w", encoding="utf-8") as f:
+                    yaml.dump(compose_data, f, default_flow_style=False, sort_keys=False)
+                print(f"Removed {tenant} from docker-compose.yml")
 
         # 4. Reload Caddy
         try:
             caddy_c = None
             try:
-                caddy_c = client.containers.get("elvis_caddy")
-            except:
                 caddy_c = client.containers.get("zjedzit_caddy")
+            except:
+                caddy_c = client.containers.get("elvis_caddy")
             
             if caddy_c:
                 caddy_c.exec_run("caddy reload --config /etc/caddy/Caddyfile")
-        except: pass
+                print("Caddy reloaded")
+        except Exception as ce:
+            print(f"Caddy reload failed: {ce}")
             
         return {"success": True}
     except Exception as e:
+        logger.error(f"Error in delete_tenant: {e}")
         return JSONResponse({"error": str(e)}, status_code=500)
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <title>Zjedz.it Orchestrator Dash</title>
@@ -20,18 +21,21 @@
             --text-dim: #888;
         }
 
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            padding: 40px 20px; 
-            margin: 0; 
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 40px 20px;
+            margin: 0;
             line-height: 1.6;
             background-image: radial-gradient(circle at 50% -20%, #1a1a1a 0%, #050505 100%);
             min-height: 100vh;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
         .header {
             display: flex;
@@ -40,52 +44,56 @@
             margin-bottom: 40px;
         }
 
-        h1 { 
-            margin: 0; 
-            color: var(--text); 
-            font-size: 2.5em; 
-            font-weight: 800; 
+        h1 {
+            margin: 0;
+            color: var(--text);
+            font-size: 2.5em;
+            font-weight: 800;
             letter-spacing: -0.04em;
             background: linear-gradient(to right, #fff, #888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .card { 
-            background: var(--card-bg); 
+        .card {
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border: 1px solid var(--border); 
-            padding: 30px; 
-            border-radius: 20px; 
-            margin-bottom: 30px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
         }
 
-        h2 { 
-            margin-top: 0; 
-            font-size: 1.4em; 
-            margin-bottom: 25px; 
-            color: var(--primary); 
+        h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            margin-bottom: 25px;
+            color: var(--primary);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        ul { list-style: none; padding: 0; margin: 0; }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-        li { 
-            background: rgba(255, 255, 255, 0.03); 
-            margin-bottom: 15px; 
-            padding: 20px; 
-            border-radius: 12px; 
-            border: 1px solid var(--border); 
-            display: flex; 
+        li {
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
             flex-direction: column;
             gap: 15px;
             transition: all 0.2s ease;
         }
-        
+
         li:hover {
             border-color: var(--primary);
             background: rgba(255, 255, 255, 0.05);
@@ -118,20 +126,20 @@
             font-weight: 600;
             padding: 4px 12px;
             border-radius: 20px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
         }
 
-        .status-dot { 
-            width: 8px; 
-            height: 8px; 
-            border-radius: 50%; 
-            background: var(--danger); 
-            box-shadow: 0 0 10px var(--danger); 
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
         }
-        
-        .status-dot.active { 
-            background: var(--success); 
-            box-shadow: 0 0 10px var(--success); 
+
+        .status-dot.active {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
         }
 
         .stat-grid {
@@ -141,28 +149,38 @@
         }
 
         .stat-card {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 10px 15px;
             border-radius: 8px;
             font-size: 0.85em;
         }
 
-        .stat-label { color: var(--text-dim); display: block; margin-bottom: 2px; font-size: 0.8em; text-transform: uppercase; }
-        .stat-value { font-weight: 600; color: #fff; }
+        .stat-label {
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
 
-        .btn { 
-            background: var(--primary); 
-            color: #fff; 
-            border: none; 
-            padding: 12px 24px; 
-            border-radius: 10px; 
-            font-weight: 600; 
-            cursor: pointer; 
+        .stat-value {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px var(--primary-glow);
         }
 
-        .btn:hover { 
+        .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px var(--primary-glow);
         }
@@ -182,17 +200,26 @@
             box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
         }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.85em; color: var(--text-dim); font-weight: 500; }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-        input { 
-            background: rgba(0,0,0,0.4); 
-            border: 1px solid var(--border); 
-            color: #fff; 
-            padding: 12px 16px; 
-            border-radius: 10px; 
-            font-size: 1em; 
-            width: 100%; 
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 1em;
+            width: 100%;
             box-sizing: border-box;
             transition: border-color 0.2s;
         }
@@ -202,9 +229,9 @@
             border-color: var(--primary);
         }
 
-        #error-msg { 
-            margin-top: 15px; 
-            font-size: 0.9em; 
+        #error-msg {
+            margin-top: 15px;
+            font-size: 0.9em;
             padding: 12px;
             border-radius: 8px;
             display: none;
@@ -215,22 +242,38 @@
             gap: 2px;
             align-items: flex-end;
             height: 24px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 4px;
             border-radius: 4px;
         }
 
-        .bar { width: 4px; border-radius: 1px; }
+        .bar {
+            width: 4px;
+            border-radius: 1px;
+        }
 
         /* Animation for loading */
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
-        .loading { animation: pulse 1.5s infinite; color: var(--text-dim); }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+            color: var(--text-dim);
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -239,9 +282,14 @@
                 <span class="status-dot active"></span> SYSTEM STABLE
             </div>
         </div>
-        
+
         <div class="card">
-            <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> Aktywne Środowiska</h2>
+            <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg> Aktywne Środowiska</h2>
             <ul id="pings-list">
                 <li class="loading">Ładowanie infrastruktury Docker...</li>
             </ul>
@@ -249,7 +297,9 @@
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
             <div class="card">
-                <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg> Nowy Tenant</h2>
+                <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg> Nowy Tenant</h2>
                 <div class="form-group">
                     <label>Nazwa subdomeny</label>
                     <input type="text" id="tenant_name" placeholder="np. kawiarnia" autocomplete="off">
@@ -268,10 +318,11 @@
 
             <div class="card" id="ai-zone" style="border-top: 4px solid var(--primary);">
                 <h2>🤖 Diagnostyka AI</h2>
-                <div id="ai-status-info" style="margin-bottom: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; font-size: 0.9em;">
+                <div id="ai-status-info"
+                    style="margin-bottom: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; font-size: 0.9em;">
                     Wpisz PIN by zobaczyć status...
                 </div>
-                
+
                 <div style="display: grid; gap: 15px; margin-bottom: 15px;">
                     <div>
                         <label>Model Gemini</label>
@@ -286,12 +337,14 @@
                     <label>Potwierdź PIN</label>
                     <input type="password" id="ai-master-pin" placeholder="****">
                 </div>
-                
+
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button class="btn" style="background: rgba(255,255,255,0.05); color: #fff; box-shadow: none;" onclick="testAI()">TEST</button>
+                    <button class="btn" style="background: rgba(255,255,255,0.05); color: #fff; box-shadow: none;"
+                        onclick="testAI()">TEST</button>
                     <button class="btn" onclick="saveAIConfig()">ZAPISZ</button>
                 </div>
-                <div id="ai-test-result" style="margin-top: 15px; font-size: 0.8em; display: none; padding: 12px; border-radius: 8px;"></div>
+                <div id="ai-test-result"
+                    style="margin-top: 15px; font-size: 0.8em; display: none; padding: 12px; border-radius: 8px;"></div>
             </div>
         </div>
     </div>
@@ -302,12 +355,12 @@
         async function loadAIStatus() {
             const pin = document.getElementById('ai-master-pin').value || document.getElementById('master_pin').value;
             if (!pin) return;
-            
+
             try {
                 const res = await fetch(`/api/dash/ai_config?master_pin=${encodeURIComponent(pin)}`);
                 const data = await res.json();
                 if (data.error) return;
-                
+
                 const info = document.getElementById('ai-status-info');
                 document.getElementById('ai-model-name').value = data.AI_MODEL_NAME || "gemini-2.5-flash";
                 info.innerHTML = `
@@ -317,7 +370,7 @@
                     </div>
                     <div style="color: var(--text-dim); font-size: 0.85em;">API Key: ${data.MASKED_KEY || "BRAK"}</div>
                 `;
-            } catch (e) {}
+            } catch (e) { }
         }
 
         async function createTenant() {
@@ -325,18 +378,18 @@
             const pin = document.getElementById('master_pin').value.trim();
             const token = document.getElementById('tenant_ai_token').value.trim();
             const err = document.getElementById('error-msg');
-            
+
             if (!name || !pin) return alert("Podaj nazwę i PIN.");
-            
+
             err.style.display = 'block';
             err.style.background = 'rgba(74, 144, 226, 0.1)';
             err.style.color = var(--primary);
             err.innerText = "Budowanie kontenerów... Może to zająć do 30s.";
-            
+
             try {
                 const res = await fetch('/api/dash/create_tenant', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ tenant: name, pin: pin, tenant_token: token || undefined })
                 });
                 const data = await res.json();
@@ -357,8 +410,14 @@
         }
 
         async function deleteTenant(name) {
+            const btn = event.target;
+            const originalText = btn.innerText;
+            
             const pin = prompt(`UWAGA: Usunięcie tenanta "${name}" jest nieodwracalne (baza danych zostanie skasowana!).\n\nPodaj PIN Architekta aby potwierdzić:`);
             if (!pin) return;
+            
+            btn.innerText = "USUWANIE...";
+            btn.disabled = true;
             
             try {
                 const res = await fetch('/api/dash/delete_tenant', {
@@ -372,9 +431,13 @@
                     loadStatus();
                 } else {
                     alert("Błąd: " + data.error);
+                    btn.innerText = originalText;
+                    btn.disabled = false;
                 }
             } catch (e) {
                 alert("Błąd sieci.");
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         }
 
@@ -387,9 +450,9 @@
                         list.innerHTML = `<li style="color:var(--danger)">Błąd: ${data.error}</li>`;
                         return;
                     }
-                    
+
                     list.innerHTML = '';
-                    if(!data.pings || data.pings.length === 0) {
+                    if (!data.pings || data.pings.length === 0) {
                         list.innerHTML = `<li>Brak aktywnych tenantów. Dodaj pierwszą restaurację poniżej.</li>`;
                         return;
                     }
@@ -398,7 +461,7 @@
                         if (!window.pingHistory[p.domain]) window.pingHistory[p.domain] = [];
                         window.pingHistory[p.domain].push(p.latency_ms);
                         if (window.pingHistory[p.domain].length > 30) window.pingHistory[p.domain].shift();
-                        
+
                         let chartHTML = '<div class="latency-chart">';
                         window.pingHistory[p.domain].forEach(lat => {
                             let h = lat > 0 ? Math.max(4, Math.min(24, 24 - (lat / 20))) : 2;
@@ -429,13 +492,19 @@
                                         <span class="stat-value">${p.db_size}</span>
                                     </div>
                                     <div class="stat-card">
-                                        <span class="stat-label">Motyw</span>
-                                        <span class="stat-value">${p.custom_template ? 'Custom' : 'Domyślny'}</span>
-                                    </div>
+                                         <span class="stat-label">Motyw (FTP Path)</span>
+                                         <span class="stat-value" style="font-size: 0.8em; font-family: monospace;">${p.template_path}</span>
+                                     </div>
                                     <div class="stat-card">
                                         <span class="stat-label">Latencja</span>
                                         <span class="stat-value">${p.latency_ms > 0 ? p.latency_ms + 'ms' : '---'}</span>
                                     </div>
+                                    <div class="stat-card">
+                                         <span class="stat-label">Ping (/health)</span>
+                                         <span class="stat-value" style="color: ${p.app_health_db ? 'var(--success)' : 'var(--danger)'}">
+                                             ${p.app_health_db ? 'OK (Baza połączona)' : 'Brak odpowiedzi / Błąd DB'}
+                                         </span>
+                                     </div>
                                     <div class="stat-card" style="flex-grow: 1; display: flex; align-items: center; justify-content: flex-end;">
                                         ${chartHTML}
                                     </div>
@@ -450,16 +519,16 @@
         async function testAI() {
             const resBox = document.getElementById('ai-test-result');
             const pin = document.getElementById('ai-master-pin').value || document.getElementById('master_pin').value;
-            if(!pin) return alert("Podaj PIN!");
-            
+            if (!pin) return alert("Podaj PIN!");
+
             resBox.style.display = 'block';
             resBox.style.background = 'rgba(255,255,255,0.05)';
             resBox.innerText = "Testowanie...";
-            
+
             try {
                 const res = await fetch('/api/dash/ai_test', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ master_pin: pin })
                 });
                 const data = await res.json();
@@ -475,14 +544,14 @@
 
         async function saveAIConfig() {
             const pin = document.getElementById('ai-master-pin').value || document.getElementById('master_pin').value;
-            if(!pin) return alert("Podaj PIN!");
+            if (!pin) return alert("Podaj PIN!");
             const model = document.getElementById('ai-model-name').value;
             const key = document.getElementById('ai-api-key').value;
-            
+
             try {
                 const res = await fetch('/api/dash/ai_config', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ master_pin: pin, AI_MODEL_NAME: model, GEMINI_API_KEY: key || undefined })
                 });
                 const data = await res.json();
@@ -490,14 +559,14 @@
                     alert("Zapisano!");
                     loadAIStatus();
                 } else alert("Błąd: " + data.error);
-            } catch (e) {}
+            } catch (e) { }
         }
 
         document.getElementById('ai-master-pin').addEventListener('blur', loadAIStatus);
-        setInterval(loadStatus, 10000);
+        setInterval(loadStatus, 20000); // Odświeżaj co 20 sekund wg życzenia
         loadStatus();
         loadAIStatus();
     </script>
 </body>
-</html>
 
+</html>
