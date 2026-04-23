@@ -1,4 +1,4 @@
-﻿# Elvis POS Expansion Roadmap (Zjedz.it)
+# Elvis POS Expansion Roadmap (Zjedz.it)
 
 Ten dokument przedstawia strategiczny plan rozwoju systemu Elvis POS, koncentrując się na integracji sprzętowej, zamówieniach online oraz zaawansowanej analityce AI.
 
@@ -26,7 +26,7 @@ Ten dokument przedstawia strategiczny plan rozwoju systemu Elvis POS, koncentruj
 - [ ] **Pre-order with Reservation**: Możliwość zamówienia jedzenia z wyprzedzeniem przy rezerwacji stolika.
 - [ ] **SMS Reminders**: Automatyczne przypomnienia o rezerwacji 1h przed terminem.
 
-## 🧠 Faza 4: AI Business Intelligence (SieT520eń 2026)
+## 🧠 Faza 4: AI Business Intelligence (Sierpień 2026)
 *Cel: Wykorzystanie danych do optymalizacji zysków (AI Analytics).*
 
 - [ ] **Demand Prediction**: AI analizuje historyczne dane (pogoda, dzień tygodnia, wydarzenia) i przewiduje obłożenie.

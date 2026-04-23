@@ -1,32 +1,32 @@
-# Zjedz.it POS — Vision & Market Strategy
+# Zjedz.it POS — Wizja i Strategia Rynkowa
 
-## Mission: Democratizing High-Tech for Gastronomy
-**Zjedz.it POS** is more than software. It's the answer to the three main challenges of modern dining: **Speed, Stability, and AI-Driven Profit**. Whether it's a high-volume food truck or a premium restaurant, we provide a "Brain" that works locally at lightning speed.
+## Misja: Demokratyzacja wysokich technologii w gastronomii
+**Zjedz.it POS** to coś więcej niż oprogramowanie. To odpowiedź na trzy główne wyzwania nowoczesnej gastronomii: **Szybkość, Stabilność i Zysk oparty na AI**. Niezależnie od tego, czy jest to food truck o dużym natężeniu ruchu, czy restauracja premium, zapewniamy „Mózg”, który działa lokalnie z błyskawiczną prędkością.
 
-## The Zjedz.it Edge
+## Przewaga Zjedz.it
 
-### 1. Hardware Sovereignty (The Edge Terminal Power)
-- **Problem**: Traditional POS systems are bulky, expensive, and slow.
-- **Solution**: Zjedz.it runs on a **Lenovo T520 with SSD storage**. Repurposed as a dedicated edge POS server. Low power consumption, high performance.
+### 1. Suwerenność sprzętowa (Moc terminala Edge)
+- **Problem**: Tradycyjne systemy POS są nieporęczne, drogie i wolne.
+- **Rozwiązanie**: Zjedz.it działa na **Lenovo T520 z dyskiem SSD**. Wykorzystany jako dedykowany serwer POS edge. Niski pobór mocy, wysoka wydajność.
 
-### 2. QR-Ordering 2.0: From Orders to Experiences
-- **Problem**: Waiters spend 70% of their time just walking back and forth to enter orders.
-- **Solution**: Guests order directly via the **Zjedz.it PWA Menu**. The staff becomes "Brand Ambassadors" rather than data entry clerks. This eliminates lines at food trucks and speeds up table turnover in restaurants.
+### 2. Zamawianie przez QR 2.0: Od zamówień do doświadczeń
+- **Problem**: Kelnerzy spędzają 70% czasu na chodzeniu tam i z powrotem, aby wprowadzać zamówienia.
+- **Rozwiązanie**: Goście zamawiają bezpośrednio przez **Menu PWA Zjedz.it**. Personel staje się „Ambasadorami Marki”, a nie urzędnikami wprowadzającymi dane. Eliminuje to kolejki w food truckach i przyspiesza rotację stolików w restauracjach.
 
-### 3. AI profit Architect (Gemini Integration)
-- **Problem**: Staff often forgets to "upsell" during busy hours.
-- **Solution**: Our **Gemini AI Engine** analyzes carts in real-time. It suggests sides, dips, and drinks in a natural, entertaining way (AI Storyteller), increasing average ticket size by 15-25% without extra human effort.
+### 3. Architekt Zysku AI (Integracja z Gemini)
+- **Problem**: Personel często zapomina o „dosprzedaży” (upsellingu) w godzinach szczytu.
+- **Rozwiązanie**: Nasz **Silnik AI Gemini** analizuje koszyki w czasie rzeczywistym. Sugeruje dodatki, sosy i napoje w naturalny, zabawny sposób (AI Storyteller), zwiększając średnią wartość zamówienia o 15-25% bez dodatkowego wysiłku ludzkiego.
 
-### 4. Edge-Master Architecture: Internet Independence
-- **Problem**: No internet = No sales in most cloud-based POS systems.
-- **Solution**: With our **Edge-Master** approach, the database (PostgreSQL) and backend are **local**. Your restaurant keeps running even if the neighborhood's internet goes down. Everything syncs to management dashboards.
+### 4. Architektura Edge-Master: Niezależność od Internetu
+- **Problem**: Brak internetu = brak sprzedaży w większości systemów POS opartych na chmurze.
+- **Rozwiązanie**: Dzięki naszemoc podejścia **Edge-Master**, baza danych (PostgreSQL) i backend są **lokalne**. Twoja restauracja działa dalej, nawet jeśli internet w okolicy padnie. Wszystko synchronizuje się z panelami zarządzania, gdy połączenie wróci.
 
-## Target Market — The Perfect Fit
-- **Next-Gen Food Trucks**: Need minimal hardware and maximum speed in festival conditions.
-- **Modern Bistros & Bars**: Focused on "vibe" and personalization, leveraging AI to stand out.
-- **Ghost Kitchens**: Where efficiency of the KDS and data analytics are the only things that matter.
+## Rynek Docelowy — Idealne Dopasowanie
+- **Nowoczesne Food Trucki**: Potrzebują minimalnego sprzętu i maksymalnej szybkości w warunkach festiwalowych.
+- **Nowoczesne Bistro i Bary**: Skupione na klimacie i personalizacji, wykorzystujące AI, aby się wyróżnić.
+- **Ghost Kitchens**: Gdzie liczy się tylko wydajność KDS i analityka danych.
 
-## ROI — The Economics of Zjedz.it
-- **Lower Capex**: Replace $2000 POS terminals with a $150 T520 system + consumer tablets.
-- **Operational Efficiency**: One waiter can handle 2x more tables thanks to guest self-service.
-- **Privacy & Security**: Your data stays in your building on your local SSD drive.
+## ROI — Ekonomia Zjedz.it
+- **Niższy Capex**: Zastąp terminale POS za 8000 PLN systemem opartym na T520 za 600 PLN + konsumenckie tablety.
+- **Wydajność operacyjna**: Jeden kelner może obsłużyć 2x więcej stolików dzięki samoobsłudze gości.
+- **Prywatność i Bezpieczeństwo**: Twoje dane pozostają w Twoim budynku na Twoim lokalnym dysku SSD.

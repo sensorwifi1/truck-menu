@@ -1,4 +1,4 @@
-﻿# Oferta: Zjedz.it POS — System Sprzedaży "Edge-Master"
+# Oferta: Zjedz.it POS — System Sprzedaży "Edge-Master"
 
 **Przygotowano dla:** ______________________
 **Data:** ______________________
@@ -8,7 +8,7 @@
 
 ### Dlaczego Zjedz.it?
 1. **Gemini AI Storyteller**: System automatycznie generuje żarty, ciekawostki o daniach oraz sugestie dodatków, budując relację z klientem i zwiększając średni paragon o 15-25%.
-2. **Prędkość SSD**: Dzięki lokalnej bazie MongoDB na dyskach M.2, menu działa błyskawicznie, bez "lagów" typowych dla systemów chmurowych.
+2. **Prędkość SSD**: Dzięki lokalnej bazie PostgreSQL na dyskach SSD, menu działa błyskawicznie, bez "lagów" typowych dla systemów chmurowych.
 3. **Prywatność Danych**: Twoje dane sprzedażowe są bezpieczne na Twoim dysku, a nie w rękach globalnych korporacji.
 
 ---
