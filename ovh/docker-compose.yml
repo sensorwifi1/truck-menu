@@ -35,7 +35,7 @@ services:
       BRAND: ${BRAND}
       DOCKER_HOST: unix:///var/run/docker.sock
     volumes:
-    - /home/debian/truck-menu:/app:cached
+    - ..:/app:cached
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
     - elvis_net
