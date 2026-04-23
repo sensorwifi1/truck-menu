@@ -76,7 +76,7 @@ services:
     depends_on:
     - stary_db
     volumes:
-    - /opt/elvis:/app:cached
+    - ..:/app:cached
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
     - elvis_net
@@ -103,7 +103,7 @@ services:
     depends_on:
     - nowy_db
     volumes:
-    - /opt/elvis:/app:cached
+    - ..:/app:cached
     - /var/run/docker.sock:/var/run/docker.sock
     networks:
     - elvis_net
