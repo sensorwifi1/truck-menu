@@ -103,7 +103,7 @@ async def send_print_job(request: Request):
         })
         
         # In a real scenario, we'd target a specific connection from the manager
-        # For now, we broadcast it, and the T520 agent with matching key will pick it up
+        # For now, we broadcast it, and the RPi agent with matching key will pick it up
         await manager.broadcast(message)
         
         return {"success": True, "message": f"Zadanie druku ({job_type}) wysłane do {device_key}"}
@@ -657,6 +657,8 @@ async def register_marketing_consent(request: MarketingConsentRequest):
         return {"success": False, "error": str(e)}
     finally:
         db.close()
+from tenancy import setup_tenancy
+Tenant = setup_tenancy(app, SessionLocal, Base)
 
 @auth_router.post("/google_login")
 async def google_login_placeholder(token: str):
@@ -771,7 +773,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     # Rozgłaszamy do paneli admina/wydawki że status się zmienił
                     await manager.broadcast(json.dumps({"type": "update"}))
                 elif msg.get("type") == "receipt_ack":
-                    # Obsługa ACK z T520 (potwierdzenie wydruku) — aktualizacja bazy i rozgłoszenie
+                    # Obsługa ACK z RPi (potwierdzenie wydruku) — aktualizacja bazy i rozgłoszenie
                     receipt_id = msg.get("id")
                     status = msg.get("status")
                     if receipt_id:
@@ -868,10 +870,6 @@ DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://marcin:Haslo123!@loc
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-
-from tenancy import setup_tenancy
-Tenant = setup_tenancy(app, SessionLocal, Base)
-
 
 # Models
 class Client(Base):
@@ -2483,7 +2481,7 @@ async def get_last_receipt():
 
 @app.post("/api/admin/resend_receipt")
 async def resend_receipt(payload: dict):
-    # Dopisujemy typ receipt by T520 wiedziało co z tym zrobić
+    # Dopisujemy typ receipt by RPi wiedziało co z tym zrobić
     payload["type"] = "receipt"
     await manager.broadcast(json.dumps(payload))
     return {"ok": True}
@@ -2870,11 +2868,11 @@ async def wydawka_page(request: Request):
         "nfc_required": is_nfc_required()
     })
 
-# Kiosk Wydawka - dedykowany interfejs dla Lenovo T520
+# Kiosk Wydawka - dedykowany interfejs dla Raspberry Pi
 @app.get("/kiosk/wydawka", response_class=HTMLResponse)
 @app.get("/kiosk", response_class=HTMLResponse)
 async def kiosk_wydawka_page(request: Request):
-    """Dedykowany interfejs kiosku wydawki dla Lenovo T520"""
+    """Dedykowany interfejs kiosku wydawki dla Raspberry Pi"""
     return templates.TemplateResponse(request=request, name="kiosk_wydawka.html", context={
         "request": request,
         "brand": get_brand(request),
